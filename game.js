@@ -1274,9 +1274,9 @@ function drawResults() {
 
 	ctx.fillStyle = '#000';
 	ctx.font = fontSmallRegular;
-	ctx.fillText('You kept Lucky alive for',pos.x,pos.y);
+	ctx.fillText('You kept Lucky alive through',pos.x,pos.y);
 	pos.y += fontSmallRegularInterval;
-	ctx.fillText(stage  + ' stages and ' + totalTime + ' seconds', pos.x,pos.y);
+	ctx.fillText((stage - 1)  + ' stages and ' + totalTime + ' seconds', pos.x,pos.y);
 	pos.y += fontSmallRegularInterval;
 	ctx.fillText('with an accuracy of ' + finalScore + '%!',pos.x,pos.y);
 
@@ -1466,7 +1466,7 @@ function Lucky() {
 	this.update = function() {
 		var stageScore = stageResultsArr[stage - 1];
 		this.speed = this.maxSpeed * stageScore / 100;
-		if (stageScore > 90) {
+		if (stageScore > 95) {
 			this.speed = this.maxSpeed * 2 * stageScore / 100;
 		}
 		else if (stageScore < 50) {
@@ -1628,7 +1628,7 @@ function Lucky() {
 
 	// Update Lucky's maximum speed (based on canvas size)
 	this.updateMaxSpeed = function() {
-		this.maxSpeed = canvas.width / 10;
+		this.maxSpeed = canvas.width / 7;
 	};
 };
 
@@ -1712,7 +1712,17 @@ function doNext() {
 			// Otherwise if accuracy for last stage was > 91%
 			else if (stageResultsArr[stage - 1] > 91) {
 				// Calculate bonus time based on accuracy
-				var bonusPercentage =  2 * (10 - (100 - stageResultsArr[stage-1]));
+				var bonusMultiplier = 0;
+				if (timeLeft > 10) {
+					bonusMultiplier = 2;
+				}
+				else if (timeLeft > 5) {
+					bonusMultiplier = 10;
+				}
+				else {
+					bonusMultiplier = 15;
+				}
+				var bonusPercentage =  bonusMultiplier * (10 - (100 - stageResultsArr[stage-1]));
 				var bonusTime = timeLeft * bonusPercentage / 100;
 				timeLimit += bonusTime;
 			}
@@ -1735,10 +1745,10 @@ function gameOver() {
 
 	// Calculate final score by adding up all stage scores and getting average
 	var totalScore = 0;
-	for (var i = 0; i < stageResultsArr.length; i++) {
+	for (var i = 0; i < stageResultsArr.length - 1; i++) {
 		totalScore += stageResultsArr[i];
 	}
-	var score = totalScore / stageResultsArr.length;
+	var score = totalScore / (stageResultsArr.length - 1);
 	finalScore = score.toFixed(2);
 
 	// Play finish sound if synth exists.
@@ -1771,6 +1781,7 @@ function reset() {
 
 	// If player is entering menu screen, update Lucky's position.
 	else if (currentMode === 'menu') {
+		stageResultsArr.length = 0;
 		lucky.updatePos(0, canvas.height/2);
 		startTime = 0;
 		totalTime = 0;
