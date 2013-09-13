@@ -516,11 +516,11 @@ function doTouchMove(event) {
 
 		// Check direction and position of drag
 		if (dragStartPos.x <= colorAreaInterval * 1) {
-			// Dragging red up
+			// Dragging hue up
 			if (pageY < dragStartPos.y) {
 			    hueUp = true;
 			} 
-			// Dragging red down
+			// Dragging hue down
 			else {
 			    hueDown = true;
 			    hueUp = false;
@@ -528,11 +528,11 @@ function doTouchMove(event) {
 		}
 
 		else if (dragStartPos.x > colorAreaInterval * 1 && dragStartPos.x <= colorAreaInterval * 2) {
-			// Dragging green up
+			// Dragging saturation up
 			if (pageY < dragStartPos.y) {
 			    saturationUp = true;
 			} 
-			// Dragging green down
+			// Dragging saturation down
 			else {
 			    saturationDown = true;
 			    saturationUp = false;
@@ -540,11 +540,11 @@ function doTouchMove(event) {
 		}
 
 		else if (dragStartPos.x > colorAreaInterval * 2 && dragStartPos.x <= colorAreaInterval * 3) {
-			// Dragging blue up
+			// Dragging lightness up
 			if (pageY < dragStartPos.y) {
 			    lightnessUp = true;
 			} 
-			// Dragging blue down
+			// Dragging lightness down
 			else {
 			    lightnessDown = true;
 			    lightnessUp = false;
@@ -1209,7 +1209,7 @@ function drawMenu() {
 function drawInstructionArrows(endX,endY) {
 	ctx.lineWidth = 5;
 
-	// Red guide
+	// Hue guide
 	ctx.strokeStyle = '#ff0000';
 	ctx.beginPath();
 	ctx.moveTo(colorAreaInterval / 2, canvas.height);
@@ -1217,14 +1217,14 @@ function drawInstructionArrows(endX,endY) {
 	ctx.lineTo(endX,endY);
 	ctx.stroke();
 
-	// Green guide
+	// Saturation guide
 	ctx.strokeStyle = '#00ff00';
 	ctx.beginPath();
 	ctx.moveTo(colorAreaInterval * 2 - colorAreaInterval / 2, canvas.height);
 	ctx.lineTo(colorAreaInterval * 2 - colorAreaInterval / 2, endY);
 	ctx.stroke();
 
-	// Blue guide
+	// Lightness guide
 	ctx.strokeStyle = '#0000ff';
 	ctx.beginPath();
 	ctx.moveTo(colorAreaInterval * 3 - colorAreaInterval / 2, canvas.height);
