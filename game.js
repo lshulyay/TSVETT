@@ -135,19 +135,23 @@ function setPlatformVars() {
 		stateChangeSound = new Audio();
 		stateChangeSound.src = synth.getWave('2,,0.1173,,0.08,0.56,,0.32,,,,,,0.5406,,,,,0.4,,,0.1,,0.5');
 		
-		// Expanding sound
+		// Down sound
 		shrinkingSound = new Audio();
 	 	shrinkingSound.src = synth.getWave('2,0.27,1,,1,0.21,,0.06,,,,,,0.5092,,,,,1,,,,,0.6'); 
 	 	
+	 	// Up sound
 	 	expandingSound = new Audio();
 	 	expandingSound.src = synth.getWave('2,0.27,1,,1,0.24,,0.06,,,,,,0.5092,,,,,1,,,,,0.6'); 
+	 	
 	 	// Finished sound
 	 	finishedSound = new Audio();
 	 	finishedSound.src = synth.getWave('2,0.06,0.31,0.3329,0.4142,0.5103,,,,,,-0.26,0.5871,,,,,0.6799,0.77,,,,,0.5');
 
+		// Time running out sound!
 	 	tickSound = new Audio();
 	 	tickSound.src = synth.getWave('1,,0.0249,0.03,0.155,0.37,,,,,,,,,,,0.36,0.26,0.16,-0.52,0.48,0.08,,0.27');
 
+		// Lucky explosion sound
 	 	explosionSound = new Audio();
 	 	explosionSound.src = synth.getWave('3,,0.24,0.63,0.46,0.1408,,,,,,0.1399,,,,,0.2411,-0.1775,1,,,,,0.5');
 	}
